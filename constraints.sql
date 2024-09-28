@@ -26,3 +26,41 @@ ALTER TABLE Persons2 DROP CONSTRAINT PK_Person;
 ALTER TABLE Persons2 ADD PRIMARY KEY (ID);
 ALTER TABLE Persons2 ADD CONSTRAINT PK_Person PRIMARY KEY (ID);
 ALTER TABLE Persons2 ADD CONSTRAINT PK_Person PRIMARY KEY (ID,LastName);
+------------------------------------------------------
+------------------------------------------------------
+CREATE TABLE Orders (
+   OrderID int NOT NULL PRIMARY KEY,
+   OrderNumber int NOT NULL,
+   PersonID int FOREIGN KEY REFERENCES Persons(PersonID),
+);
+
+CREATE TABLE Orders (
+   OrderID int NOT NULL,
+   OrderNumber int NOT NULL,
+   PersonID int,
+   PRIMARY KEY (OrderID),
+   CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID),
+);
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+ALTER TABLE Orders
+ADD CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+ALTER TABLE Orders
+DROP CONSTRAINT FK_PersonOrder;
+------------------------------------------------------
+------------------------------------------------------
+CREATE TABLE Persons (
+   ID int NOT NULL,
+   LastName varchar(255) NOT NULL,
+   FirstName varchar(255) NOT NULL,
+   Age int
+);
+
+ALTER TABLE Persons
+ALTER COLUMN Age int NOT NULL;
+------------------------------------------------------
+------------------------------------------------------
+
