@@ -52,7 +52,7 @@ ALTER TABLE Orders
 DROP CONSTRAINT FK_PersonOrder;
 ------------------------------------------------------
 ------------------------------------------------------
-CREATE TABLE Persons (
+CREATE TABLE Persons3 (
    ID int NOT NULL,
    LastName varchar(255) NOT NULL,
    FirstName varchar(255) NOT NULL,
@@ -63,4 +63,25 @@ ALTER TABLE Persons
 ALTER COLUMN Age int NOT NULL;
 ------------------------------------------------------
 ------------------------------------------------------
+CREATE TABLE Persons4 (
+   ID int NOT NULL,
+   LastName varchar(255) NOT NULL,
+   FirstName varchar(255),
+   Age int,
+   City varchar(255) DEFAULT 'Egypt'
+);
 
+CREATE TABLE Orders2 (
+   ID int NOT NULL,
+   OrderNumber int NOT NULL,
+   OrderDate date DEFAULT GETDATE() 
+);
+
+ALTER TABLE Persons
+ADD CONSTRAINT df_City
+DEFAULT 'Amman' FOR City;
+
+ALTER TABLE Persons
+DROP Constraint  df_City;
+------------------------------------------------------
+------------------------------------------------------
