@@ -109,3 +109,46 @@ DROP CONSTRAINT CHK_Person;
 ------------------------------------------------------
 ------------------------------------------------------
 ------------------------------------------------------
+CREATE TABLE Persons6 (
+   ID int NOT NULL UNIQUE,
+   LastName varchar(255) NOT NULL,
+   FirstName varchar(255),
+   Age int
+);
+
+CREATE TABLE Persons6 (
+   ID int NOT NULL,
+   LastName varchar(255) NOT NULL,
+   FirstName varchar(255),
+   Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName),
+    CONSTRAINT UN_PERSON UNIQUE (ID,FirstName),
+);
+
+ALTER TABLE Persons6
+ADD UNIQUE (ID);
+
+ALTER TABLE Persons6
+ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+
+ALTER TABLE Persons6
+DROP CONSTRAINT UC_Person;
+------------------------------------------------------
+-------------------------INDEX------------------------
+------------------------------------------------------
+CREATE TABLE Persons7 (
+   ID int NOT NULL PRIMARY KEY,
+   FirstName varchar(255)NOT NULL,
+   LastName varchar(255) NOT NULL,
+   Age int
+);
+-- CREATE INDEX index_name ON table_name (column1, column2, ...);
+CREATE INDEX INDEX_FIRSTNAME ON Persons7(FirstName);
+CREATE INDEX INDEX_NAME ON Persons7 (LastName, FirstName);
+-- DROP INDEX table_name.index_name;
+DROP INDEX Persons7.INDEX_NAME;
+DROP INDEX Persons7.INDEX_FIRSTNAME;
+DROP TABLE Persons7;
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
