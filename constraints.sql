@@ -9,6 +9,9 @@
 -- CREATE INDEX - Used to create and retrieve data from the database very quickly
 
 -- Constraint
+------------------------------------------------------
+--------------------PRIMARY KEY-----------------------
+------------------------------------------------------
 CREATE TABLE Persons(
     ID int not null primary key,
     FirstName NVARCHAR(255) not null,
@@ -27,6 +30,7 @@ ALTER TABLE Persons2 ADD PRIMARY KEY (ID);
 ALTER TABLE Persons2 ADD CONSTRAINT PK_Person PRIMARY KEY (ID);
 ALTER TABLE Persons2 ADD CONSTRAINT PK_Person PRIMARY KEY (ID,LastName);
 ------------------------------------------------------
+--------------------FOREIGN KEY-----------------------
 ------------------------------------------------------
 CREATE TABLE Orders (
    OrderID int NOT NULL PRIMARY KEY,
@@ -51,6 +55,7 @@ ADD CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID
 ALTER TABLE Orders
 DROP CONSTRAINT FK_PersonOrder;
 ------------------------------------------------------
+----------------------NOT NULL------------------------
 ------------------------------------------------------
 CREATE TABLE Persons3 (
    ID int NOT NULL,
@@ -62,6 +67,7 @@ CREATE TABLE Persons3 (
 ALTER TABLE Persons
 ALTER COLUMN Age int NOT NULL;
 ------------------------------------------------------
+-----------------------DEFAULT------------------------
 ------------------------------------------------------
 CREATE TABLE Persons4 (
    ID int NOT NULL,
@@ -77,11 +83,29 @@ CREATE TABLE Orders2 (
    OrderDate date DEFAULT GETDATE() 
 );
 
-ALTER TABLE Persons
-ADD CONSTRAINT df_City
-DEFAULT 'Amman' FOR City;
+ALTER TABLE Persons4 ADD CONSTRAINT df_City DEFAULT 'Amman' FOR City;
+ALTER TABLE Persons DROP Constraint  df_City;
+------------------------------------------------------
+-----------------------CHECK--------------------------
+------------------------------------------------------
+CREATE TABLE Persons5 (
+   ID int NOT NULL,
+   LastName varchar(255) NOT NULL,
+   FirstName varchar(255),
+   Age int CHECK (Age>=18),
+);
 
-ALTER TABLE Persons
-DROP Constraint  df_City;
+CREATE TABLE Persons5 (
+   ID int NOT NULL,
+   LastName varchar(255) NOT NULL,
+   FirstName varchar(255),
+   Age int,
+   City varchar(255),
+    CONSTRAINT CHK_Person CHECK (Age>=18 AND City='cairo')
+);
+
+ALTER TABLE Persons5
+DROP CONSTRAINT CHK_Person; 
+------------------------------------------------------
 ------------------------------------------------------
 ------------------------------------------------------
