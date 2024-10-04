@@ -1,0 +1,133 @@
+CREATE TABLE Specialization
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Specialization NVARCHAR NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE MedicalRecords
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Description NVARCHAR NOT NULL,
+  Diagnosis NVARCHAR NOT NULL,
+  Notes NVARCHAR,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE Medication
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  MedicationName NVARCHAR NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE Person
+(
+  id INT NOT NULL IDENTITY(1,1),
+  Name NVARCHAR NOT NULL,
+  Gender NVARCHAR NOT NULL,
+  Birthday DATE NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE AppointmentStatus
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Status NVARCHAR NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE Prescription
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Dosage NVARCHAR NOT NULL,
+  Frequency INT NOT NULL,
+  StartDate DATE NOT NULL,
+  EndDate DATE NOT NULL,
+  SpecialInstructions NVARCHAR NOT NULL,
+  MedicationID INT NOT NULL,
+  MedicalRecordID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (MedicationID) REFERENCES medication(ID),
+  FOREIGN KEY (MedicalRecordID) REFERENCES MedicalRecords(ID)
+);
+
+CREATE TABLE PaymentMethods
+(
+  id INT NOT NULL IDENTITY(1,1),
+  MethodName NVARCHAR NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE Patients
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  PersonID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (PersonID) REFERENCES Person(id)
+);
+
+CREATE TABLE Emails
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Email NVARCHAR NOT NULL,
+  PersonID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (PersonID) REFERENCES Person(id)
+);
+
+CREATE TABLE Phones
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Phone NVARCHAR NOT NULL,
+  PersonID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (PersonID) REFERENCES Person(id)
+);
+
+CREATE TABLE Addresses
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Address NVARCHAR NOT NULL,
+  PersonID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (PersonID) REFERENCES Person(id)
+);
+
+CREATE TABLE Doctors
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  SpecializationID INT NOT NULL,
+  PersonID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (SpecializationID) REFERENCES specialization(ID),
+  FOREIGN KEY (PersonID) REFERENCES Person(id)
+);
+
+CREATE TABLE Payments
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  Date DATE NOT NULL,
+  AmountPaid FLOAT NOT NULL,
+  Notes NVARCHAR,
+  PaymentMethodID INT NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (PaymentMethodID) REFERENCES PaymentMethods(id)
+);
+
+CREATE TABLE Appointments
+(
+  ID INT NOT NULL IDENTITY(1,1),
+  DateTime DATETIME NOT NULL,
+  PatientID INT NOT NULL,
+  DoctorID INT NOT NULL,
+  AppointmentStatusID INT NOT NULL,
+  MedicalRecordID INT,
+  PaymentID INT,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (PatientID) REFERENCES Patients(ID),
+  FOREIGN KEY (DoctorID) REFERENCES Doctors(ID),
+  FOREIGN KEY (AppointmentStatusID) REFERENCES AppointmentStatus(ID),
+  FOREIGN KEY (MedicalRecordID) REFERENCES MedicalRecords(ID),
+  FOREIGN KEY (PaymentID) REFERENCES Payments(ID)
+);
