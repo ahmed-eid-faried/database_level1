@@ -1,7 +1,7 @@
 -- USE MASTER;
 -- CREATE DATABASE CarRental;
-
 USE CarRental;
+
 CREATE TABLE Customers
 (
   CustomerID INT NOT NULL IDENTITY(1,1),

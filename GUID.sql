@@ -1,0 +1,3 @@
+USE HR_DB;
+SELECT top 10  NEWID() as GUID,* FROM Employees
+ORDER by NEWID();
