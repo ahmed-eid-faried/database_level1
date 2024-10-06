@@ -1,0 +1,34 @@
+--   Problem 1: Create Master View
+
+--  Makes.Make, *
+-- select count(*) FROM VehicleDetails  JOIN Makes ON (Makes.MakeID = VehicleDetails.MakeID)
+-- select count(*) FROM VehicleDetails left JOIN Makes ON (Makes.MakeID = VehicleDetails.MakeID)
+-- select count(*) FROM VehicleDetails right JOIN Makes ON (Makes.MakeID = VehicleDetails.MakeID)
+-- select count(*) FROM VehicleDetails full outer JOIN Makes ON (Makes.MakeID = VehicleDetails.MakeID)
+-- select  *, Makes.Make FROM VehicleDetails right JOIN Makes ON (Makes.MakeID = VehicleDetails.MakeID)
+-- select  *, MakeModels.ModelName FROM VehicleDetails right JOIN MakeModels ON (MakeModels.ModelID = VehicleDetails.ModelID)
+-- select  *, SubModels.SubModelName FROM VehicleDetails right JOIN SubModels ON (SubModels.SubModelID = VehicleDetails.SubModelID)
+-- select  *, FuelTypes.FuelTypeName FROM VehicleDetails right JOIN FuelTypes ON (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
+-- select  *, DriveTypes.DriveTypeName FROM VehicleDetails right JOIN DriveTypes ON (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+-- select  *, Bodies.BodyName FROM VehicleDetails right JOIN Bodies ON (Bodies.BodyID = VehicleDetails.BodyID)
+ 
+ CREATE VIEW VehicleMasterDetails as
+ select  
+ VehicleDetails.*, 
+ Makes.Make, 
+ MakeModels.ModelName, 
+ SubModels.SubModelName, 
+ FuelTypes.FuelTypeName, 
+ DriveTypes.DriveTypeName,
+ Bodies.BodyName
+FROM 
+ VehicleDetails 
+ inner JOIN Makes ON (Makes.MakeID = VehicleDetails.MakeID)
+ inner JOIN MakeModels ON (MakeModels.ModelID = VehicleDetails.ModelID)
+ inner JOIN SubModels ON (SubModels.SubModelID = VehicleDetails.SubModelID)
+ inner JOIN FuelTypes ON (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
+ inner JOIN DriveTypes ON (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+ inner JOIN Bodies ON (Bodies.BodyID = VehicleDetails.BodyID);
+ 
+select * from VehicleDetails;
+select * from VehicleMasterDetails;
