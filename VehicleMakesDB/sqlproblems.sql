@@ -42,5 +42,15 @@ select distinct VehicleDetails.Vehicle_Display_Name from VehicleDetails where Ve
 -----------------------------------------------------------------
 -- Problem 3 : Get number vehicles made between 1950 and 2000
 -------------------------------------------------------------
-select distinct count(*) from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
-select distinct count(VehicleDetails.Vehicle_Display_Name) from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
+select distinct count(*) as NumberOfVehicles from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
+select distinct count(VehicleDetails.Vehicle_Display_Name)as NumberOfVehicles  from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- Problem 4 : Get number vehicles made between 1950 and 2000 per make and order them by Number Of Vehicles Descending
+
+select Makes.Make, count(*) as count from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+where VehicleDetails.Year between 1950 and 2000
+Group by Make
+order by count Desc;
+ 
