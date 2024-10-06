@@ -32,3 +32,15 @@ FROM
  
 select * from VehicleDetails;
 select * from VehicleMasterDetails;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- Problem 2: Get all vehicles made between 1950 and 2000
+----------------------------------------------------------
+select distinct * from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
+select distinct VehicleDetails.Vehicle_Display_Name from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- Problem 3 : Get number vehicles made between 1950 and 2000
+-------------------------------------------------------------
+select distinct count(*) from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
+select distinct count(VehicleDetails.Vehicle_Display_Name) from VehicleDetails where VehicleDetails.Year between 1950 and 2000;
