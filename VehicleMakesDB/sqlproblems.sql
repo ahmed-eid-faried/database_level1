@@ -48,9 +48,32 @@ select distinct count(VehicleDetails.Vehicle_Display_Name)as NumberOfVehicles  f
 -----------------------------------------------------------------
 -- Problem 4 : Get number vehicles made between 1950 and 2000 per make and order them by Number Of Vehicles Descending
 
-select Makes.Make, count(*) as count from VehicleDetails
+select Makes.Make, count(*) as NumberOfVehicles from VehicleDetails
 inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
 where VehicleDetails.Year between 1950 and 2000
 Group by Make
-order by count Desc;
- 
+order by NumberOfVehicles Desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- Problem 5 : Get All Makes that have manufactured more than 12000 Vehicles in years 1950 to 2000
+select Makes.Make, count(*) as NumberOfVehicles from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+where VehicleDetails.Year between 1950 and 2000
+Group by Make 
+having Count(*) > 12000
+-- having NumberOfVehicles> 12000--Invalid column name 'NumberOfVehicles'.
+order by NumberOfVehicles Desc;
+
+-----------------------------------------------------------------
+--other soln without having
+select * from (
+select Makes.Make, count(*) as NumberOfVehicles from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+where VehicleDetails.Year between 1950 and 2000
+Group by Make 
+--The ORDER BY clause is invalid in views, inline functions, derived tables, subqueries, and common table expressions, unless TOP, OFFSET or FOR XML is also specified.
+-- order by NumberOfVehicles Desc;
+) as R
+where R.NumberOfVehicles > 12000
+-----------------------------------------------------------------
+-----------------------------------------------------------------
