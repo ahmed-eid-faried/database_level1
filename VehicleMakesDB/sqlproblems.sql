@@ -209,3 +209,20 @@ WHERE NumberOfVehicles >20000
 ORDER BY NumberOfVehicles DESC;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+-- Write a query to get all Makes with make starts with 'B'.
+SELECT * FROM Makes where Makes.Make LIKE 'B%';
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--Get all  Makes with make ends with 'W'
+SELECT * FROM Makes where Make Like '%W';
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--Problem 16: Get all Makes that manufactures DriveTypeName = FWD
+select DISTINCT Makes.Make, DriveTypes.DriveTypeName
+from VehicleDetails
+    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+    inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+ where DriveTypes.DriveTypeName =N'FWD';
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
