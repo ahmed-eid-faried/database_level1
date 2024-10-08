@@ -147,3 +147,14 @@ inner join FuelTypes on (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
 where FuelTypes.FuelTypeName =N'GAS';--N FOR OTHER LANG AS ARABIC 
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--     Problem 11: Get Total Makes that runs with GAS
+select count(*) AS TotalMakesRunOnGas FROM
+(
+select DISTINCT (Makes.Make)
+from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+inner join FuelTypes on (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
+where FuelTypes.FuelTypeName =N'GAS'
+)R;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
