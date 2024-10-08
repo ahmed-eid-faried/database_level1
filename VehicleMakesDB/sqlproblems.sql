@@ -240,10 +240,37 @@ FROM(
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
-
+select DISTINCT Makes.Make, DriveTypes.DriveTypeName, count(*)AS TotalVehicles
+from VehicleDetails
+    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+    inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+group by DriveTypes.DriveTypeName  ,Makes.Make
+order by Makes.Make asc, TotalVehicles desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- Problem 19: Get total vehicles per DriveTypeName Per Make then filter only results with total > 10,000
+select DISTINCT Makes.Make, DriveTypes.DriveTypeName, count(*)AS TotalVehicles
+from VehicleDetails
+    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+    inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+group by DriveTypes.DriveTypeName  ,Makes.Make
+having count(*)>10000
+order by Makes.Make asc, TotalVehicles desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
 select DISTINCT Makes.Make, DriveTypes.DriveTypeName, count(*)AS MakeWithFWD
 from VehicleDetails
     inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
     inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
 group by DriveTypes.DriveTypeName  ,Makes.Make
-order by Makes.Make asc, DriveTypes.DriveTypeName desc;
+order by Makes.Make asc, MakeWithFWD desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
+select DISTINCT Makes.Make, DriveTypes.DriveTypeName, count(*)AS MakeWithFWD
+from VehicleDetails
+    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+    inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+group by DriveTypes.DriveTypeName  ,Makes.Make
+order by Makes.Make asc, MakeWithFWD desc;
