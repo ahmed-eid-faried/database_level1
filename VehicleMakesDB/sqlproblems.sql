@@ -259,8 +259,8 @@ order by Makes.Make asc, TotalVehicles desc;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 20: Get all Vehicles that number of doors is not specified
-SELECT TOP 1000 * FROM VehicleDetails
-WHERE VehicleDetails.NumDoors IS NOT NULL;
+SELECT * FROM VehicleDetails
+WHERE VehicleDetails.NumDoors IS NULL;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
