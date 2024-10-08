@@ -158,3 +158,10 @@ where FuelTypes.FuelTypeName =N'GAS'
 )R;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--   Problem 12: Count Vehicles by make and order them by NumberOfVehicles from high to low.
+select Makes.Make,COUNT(*) AS NumberOfVehicles from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+GROUP BY  Makes.Make
+ORDER BY NumberOfVehicles DESC;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
