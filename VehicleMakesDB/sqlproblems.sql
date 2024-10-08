@@ -191,6 +191,13 @@ ORDER BY NumberOfVehicles DESC;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --  Problem 13: Get all Makes/Count Of Vehicles that manufactures more than 20K Vehicles
+select Makes.Make, COUNT(*) AS NumberOfVehicles
+from VehicleDetails
+    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+GROUP BY  Makes.Make
+HAVING   COUNT(*) >20000
+ORDER BY NumberOfVehicles DESC;
+-----------------------------------------------------------------
 SELECT *
 FROM (
     select Makes.Make, COUNT(*) AS NumberOfVehicles
