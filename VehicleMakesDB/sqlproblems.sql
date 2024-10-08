@@ -78,10 +78,7 @@ where R.NumberOfVehicles > 12000
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --  Problem 6: Get number of vehicles made between 1950 and 2000 per make and add total vehicles column 
--- select   count(*) as NumberOfVehicles from VehicleDetails;
-
 select Makes.Make, count(*) as NumberOfVehicles,TotalVehicles=(select count(*) as NumberOfVehicles from VehicleDetails)
---  ,((count(*) / TotalVehicles) * 100) as p
 from VehicleDetails
 inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
 where VehicleDetails.Year between 1950 and 2000
@@ -96,9 +93,33 @@ SELECT
     Makes.Make,
     COUNT(*) AS NumberOfVehicles,
     ( SELECT COUNT(*) AS TotalVehicleCount FROM VehicleDetails) AS TotalVehicles,
-    (COUNT(*) * 100.0 / (SELECT COUNT(*) AS TotalVehicleCount FROM VehicleDetails )) AS Percentage
+    (COUNT(*) * 1.0 / (SELECT COUNT(*) AS TotalVehicleCount FROM VehicleDetails )) AS Percentage
 from VehicleDetails
     inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
 where VehicleDetails.Year between 1950 and 2000
 Group by Make
 order by NumberOfVehicles Desc;
+-----------------------------------------------------------------
+SELECT * ,(NumberOfVehicles*1.0/TotalVehicles*1.0) AS Percentage
+FROM (
+    select Makes.Make, count(*) as NumberOfVehicles,TotalVehicles=(select count(*) as NumberOfVehicles from VehicleDetails)
+from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+where VehicleDetails.Year between 1950 and 2000
+Group by Make
+-- order by NumberOfVehicles Desc
+) R 
+ORDER BY  NumberOfVehicles DESC;
+-----------------------------------------------------------------
+SELECT * ,(CAST(NumberOfVehicles AS FLOAT)/CAST(TotalVehicles AS FLOAT)) AS Percentage
+FROM (
+    select Makes.Make, count(*) as NumberOfVehicles,TotalVehicles=(select count(*) as NumberOfVehicles from VehicleDetails)
+from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+where VehicleDetails.Year between 1950 and 2000
+Group by Make
+-- order by NumberOfVehicles Desc
+) R 
+ORDER BY  NumberOfVehicles DESC;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
