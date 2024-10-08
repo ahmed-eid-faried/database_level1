@@ -229,7 +229,7 @@ from VehicleDetails
 where DriveTypes.DriveTypeName =N'FWD';
 -----------------------------------------------------------------
 -----------------------------------------------------------------
--- Get total Makes that Mantufactures DriveTypeName=FWD
+--Problem 17:  Get total Makes that Mantufactures DriveTypeName=FWD
 select count(*) AS MakeWithFWD
 FROM(
     select DISTINCT Makes.Make, DriveTypes.DriveTypeName
@@ -237,3 +237,13 @@ FROM(
         inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
         inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
     where DriveTypes.DriveTypeName =N'FWD')R;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
+
+select DISTINCT Makes.Make, DriveTypes.DriveTypeName, count(*)AS MakeWithFWD
+from VehicleDetails
+    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+    inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
+group by DriveTypes.DriveTypeName  ,Makes.Make
+order by Makes.Make asc, DriveTypes.DriveTypeName desc;
