@@ -128,6 +128,14 @@ select Makes.Make,FuelTypes.FuelTypeName, count(*) as NumberOfVehicles,TotalVehi
 from VehicleDetails
 inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
 inner join FuelTypes on (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
-where VehicleDetails.Year between 1950 and 2000
 Group by Make , FuelTypeName
 order by Make Asc,FuelTypeName ASC ;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 9: Get all vehicles that runs with GAS
+select TOP 1000 *,FuelTypes.FuelTypeName 
+from VehicleDetails
+inner join FuelTypes on (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
+where FuelTypes.FuelTypeName =N'GAS';--N FOR OTHER LANG AS ARABIC 
+-----------------------------------------------------------------
+-----------------------------------------------------------------
