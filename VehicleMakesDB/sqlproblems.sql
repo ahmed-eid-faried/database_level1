@@ -259,10 +259,30 @@ order by Makes.Make asc, TotalVehicles desc;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 20: Get all Vehicles that number of doors is not specified
-SELECT * FROM VehicleDetails
+SELECT *
+FROM VehicleDetails
 WHERE VehicleDetails.NumDoors IS NULL;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --  Problem 21: Get Total Vehicles that number of doors is not specified
-SELECT COUNT(*) AS TotalVehicles FROM VehicleDetails
+SELECT COUNT(*) AS TotalWithNoSpecifiedDoors
+FROM VehicleDetails
 WHERE VehicleDetails.NumDoors IS NULL;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--    Problem 22: Get percentage of vehicles that has no doors specified
+SELECT (CAST(COUNT(*) AS FLOAT) /(SELECT CAST(COUNT(*) AS FLOAT)
+    FROM VehicleDetails)) AS PercOfNoSpecifiedDoors
+FROM VehicleDetails
+WHERE VehicleDetails.NumDoors IS NULL;
+
+--Get percentage of vehicles that has no doors specified
+select
+    (
+		CAST(	(select count(*) as TotalWithNoSpecifiedDoors
+    from VehicleDetails
+    where NumDoors is Null) as float)
+		/	
+		Cast( (select count(*)
+    from VehicleDetails as TotalVehicles) as float)
+	) as PercOfNoSpecifiedDoors
