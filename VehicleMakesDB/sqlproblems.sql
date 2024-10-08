@@ -258,13 +258,9 @@ having count(*)>10000
 order by Makes.Make asc, TotalVehicles desc;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
---Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
-select DISTINCT Makes.Make, DriveTypes.DriveTypeName, count(*)AS MakeWithFWD
-from VehicleDetails
-    inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
-    inner join DriveTypes on (DriveTypes.DriveTypeID = VehicleDetails.DriveTypeID)
-group by DriveTypes.DriveTypeName  ,Makes.Make
-order by Makes.Make asc, MakeWithFWD desc;
+--   Problem 20: Get all Vehicles that number of doors is not specified
+SELECT TOP 1000 * FROM VehicleDetails
+WHERE VehicleDetails.NumDoors IS NOT NULL;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --Problem 18:  Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
