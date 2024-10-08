@@ -139,3 +139,11 @@ inner join FuelTypes on (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
 where FuelTypes.FuelTypeName =N'GAS';--N FOR OTHER LANG AS ARABIC 
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--     Problem 10: Get all Makes that runs with GAS
+select DISTINCT Makes.Make,FuelTypes.FuelTypeName 
+from VehicleDetails
+inner join Makes on (Makes.MakeID = VehicleDetails.MakeID)
+inner join FuelTypes on (FuelTypes.FuelTypeID = VehicleDetails.FuelTypeID)
+where FuelTypes.FuelTypeName =N'GAS';--N FOR OTHER LANG AS ARABIC 
+-----------------------------------------------------------------
+-----------------------------------------------------------------
