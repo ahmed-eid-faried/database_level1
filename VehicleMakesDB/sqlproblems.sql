@@ -484,3 +484,11 @@ SELECT DISTINCT Engine_CC,
 END AS TAX
 FROM VehicleDetails
 ORDER BY Engine_CC DESC;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 43: Get Make and Total Number Of Doors Manufactured Per Make
+SELECT DISTINCT Makes.Make,Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors  FROM VehicleDetails
+INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+GROUP BY Make
+Order By TotalNumberOfDoors desc;
+ 
