@@ -309,4 +309,10 @@ FROM VehicleDetails
     WHERE VehicleDetails.Engine LIKE '%OHV%'AND VehicleDetails.Engine_Cylinders=4 ;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--   Problem 26: Get all vehicles that their body is 'Sport Utility' and Year > 2020
+SELECT *,Bodies.BodyName FROM VehicleDetails 
+    INNER JOIN Bodies ON Bodies.BodyID =VehicleDetails.BodyID
+WHERE Bodies.BodyName = 'Sport Utility' AND VehicleDetails.Year > 2020;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
 
