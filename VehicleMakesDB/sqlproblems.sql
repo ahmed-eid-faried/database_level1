@@ -487,16 +487,28 @@ ORDER BY Engine_CC DESC;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 43: Get Make and Total Number Of Doors Manufactured Per Make
-SELECT DISTINCT Makes.Make,Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors  FROM VehicleDetails
-INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+SELECT DISTINCT Makes.Make, Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors
+FROM VehicleDetails
+    INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
 GROUP BY Make
 Order By TotalNumberOfDoors desc;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 44: Get Total Number Of Doors Manufactured by 'Ford'
-SELECT DISTINCT Makes.Make,Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors  FROM VehicleDetails
-INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+SELECT DISTINCT Makes.Make, Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors
+FROM VehicleDetails
+    INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
 GROUP BY Make
 HAVING Make='Ford'
 Order By TotalNumberOfDoors desc;
- 
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--    Problem 45: Get Number of Models Per Make
+SELECT Make, COUNT(ModelName) AS TotalNumberOfModels
+FROM (
+SELECT DISTINCT Makes.Make, MakeModels.ModelName
+    FROM VehicleDetails
+        INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+        INNER JOIN MakeModels ON MakeModels.ModelID=VehicleDetails.ModelID)R
+GROUP BY Make
+Order By TotalNumberOfModels desc;
