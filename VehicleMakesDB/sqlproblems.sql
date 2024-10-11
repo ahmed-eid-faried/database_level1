@@ -383,6 +383,9 @@ FROM VehicleDetails;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 34: Get all vehicles that have the minimum Engine_CC
-SELECT * FROM VehicleDetails;
+SELECT *
+FROM VehicleDetails
+WHERE VehicleDetails.Engine_CC=(SELECT MIN(VehicleDetails.Engine_CC)
+FROM VehicleDetails );
 -----------------------------------------------------------------
 -----------------------------------------------------------------
