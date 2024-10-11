@@ -289,14 +289,24 @@ select
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 -- Problem 23: Get MakeID , Make, SubModelName for all vehicles that have SubModelName 'Elite'
-SELECT DISTINCT VehicleDetails.MakeID , Make, SubModelName FROM VehicleDetails
-INNER JOIN Makes ON Makes.MakeID =VehicleDetails.MakeID 
-INNER JOIN SubModels ON SubModels.ModelID =VehicleDetails.ModelID 
+SELECT DISTINCT VehicleDetails.MakeID , Make, SubModelName
+FROM VehicleDetails
+    INNER JOIN Makes ON Makes.MakeID =VehicleDetails.MakeID
+    INNER JOIN SubModels ON SubModels.ModelID =VehicleDetails.ModelID
 WHERE SubModelName ='Elite';
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --  Problem 24: Get all vehicles that have Engines > 3 Liters and have only 2 doors
-select * from VehicleDetails
+select *
+from VehicleDetails
 WHERE VehicleDetails.Engine_Liter_Display>3 and NumDoors =2;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--  Problem 25: Get make and vehicles that the engine contains 'OHV' and have Cylinders = 4
+SELECT VehicleDetails.*, Make
+FROM VehicleDetails
+    INNER JOIN Makes ON Makes.MakeID =VehicleDetails.MakeID
+    WHERE VehicleDetails.Engine LIKE '%OHV%'AND VehicleDetails.Engine_Cylinders=4 ;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
