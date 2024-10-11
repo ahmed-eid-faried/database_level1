@@ -442,13 +442,45 @@ ORDER BY Engine_CC DESC;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 40: Get all vehicles that has one of the Max 3 Engine CC
-SELECT * FROM VehicleDetails
+SELECT *
+FROM VehicleDetails
 WHERE VehicleDetails.Engine_CC IN
-(SELECT DISTINCT TOP 3    VehicleDetails.Engine_CC FROM VehicleDetails ORDER BY Engine_CC DESC); 
+(SELECT DISTINCT TOP 3
+    VehicleDetails.Engine_CC
+FROM VehicleDetails
+ORDER BY Engine_CC DESC);
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 41: Get all Makes that manufactures one of the Max 3 Engine CC
-SELECT DISTINCT Makes.Make FROM VehicleDetails
-inner join Makes ON  Makes.MakeID =VehicleDetails.MakeID
+SELECT DISTINCT Makes.Make
+FROM VehicleDetails
+    inner join Makes ON  Makes.MakeID =VehicleDetails.MakeID
 WHERE VehicleDetails.Engine_CC IN
-(SELECT DISTINCT TOP 3    VehicleDetails.Engine_CC FROM VehicleDetails ORDER BY Engine_CC DESC); 
+(SELECT DISTINCT TOP 3
+    VehicleDetails.Engine_CC
+FROM VehicleDetails
+ORDER BY Engine_CC DESC)
+ORDER BY Make ASC;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 42: Get a table of unique Engine_CC and calculate tax per Engine CC
+-- Get a table of unique Engine_CC and calculate tax per Engine CC as follows:
+-- 0 to 1000    Tax = 100
+-- 1001 to 2000 Tax = 200
+-- 2001 to 4000 Tax = 300
+-- 4001 to 6000 Tax = 400
+-- 6001 to 8000 Tax = 500
+-- Above 8000   Tax = 600
+-- Otherwise    Tax = 0
+SELECT DISTINCT Engine_CC,
+    CASE
+    WHEN Engine_CC BETWEEN 0 AND 1000 then 100
+    WHEN Engine_CC BETWEEN 1001 AND 2000 then 200
+    WHEN Engine_CC BETWEEN 2001 AND 4000 then 300
+    WHEN Engine_CC BETWEEN 4001 AND 6000 then 400
+    WHEN Engine_CC BETWEEN 6001 AND 8000 then 500
+    WHEN Engine_CC > 8000  then 600
+    ELSE 0
+END AS TAX
+FROM VehicleDetails
+ORDER BY Engine_CC DESC;
