@@ -333,3 +333,7 @@ FROM VehicleDetails
 WHERE Bodies.BodyName  in ('Coupe' ,'Hatchback' ,'Sedan' ) and VehicleDetails.Year in (2008,2020,2021);
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--   Problem 29: Return found=1 if there is any vehicle made in year 1950
+SELECT FOUND=1 WHERE EXISTS(SELECT TOP 1 * FROM VehicleDetails WHERE YEAR=1950)
+-----------------------------------------------------------------
+-----------------------------------------------------------------
