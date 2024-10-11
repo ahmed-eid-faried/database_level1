@@ -504,11 +504,36 @@ Order By TotalNumberOfDoors desc;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --    Problem 45: Get Number of Models Per Make
-SELECT Make, COUNT(ModelName) AS TotalNumberOfModels
-FROM (
-SELECT DISTINCT Makes.Make, MakeModels.ModelName
-    FROM VehicleDetails
-        INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
-        INNER JOIN MakeModels ON MakeModels.ModelID=VehicleDetails.ModelID)R
-GROUP BY Make
-Order By TotalNumberOfModels desc;
+-- SELECT Make, COUNT(ModelName) AS TotalNumberOfModels
+-- FROM (
+-- SELECT DISTINCT Makes.Make, MakeModels.ModelName
+--     FROM VehicleDetails
+--         INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+--         INNER JOIN MakeModels ON MakeModels.ModelID=VehicleDetails.ModelID)R
+-- GROUP BY Make
+-- Order By TotalNumberOfModels desc;
+-----------------------------------------------------------------
+SELECT        Makes.Make, COUNT(*) AS NumberOfModels
+FROM            Makes INNER JOIN
+                         MakeModels ON Makes.MakeID = MakeModels.MakeID
+GROUP BY Makes.Make
+Order By NumberOfModels Desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 46: Get the highest 3 manufacturers that make the highest number of models
+-- SELECT TOP 3 Make, COUNT(ModelName) AS TotalNumberOfModels
+-- FROM (
+-- SELECT DISTINCT Makes.Make, MakeModels.ModelName
+--     FROM VehicleDetails
+--         INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+--         INNER JOIN MakeModels ON MakeModels.ModelID=VehicleDetails.ModelID)R
+-- GROUP BY Make
+-- Order By TotalNumberOfModels desc;
+-----------------------------------------------------------------
+SELECT     TOP 3   Makes.Make, COUNT(*) AS NumberOfModels
+FROM            Makes INNER JOIN
+                         MakeModels ON Makes.MakeID = MakeModels.MakeID
+GROUP BY Makes.Make
+Order By NumberOfModels Desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
