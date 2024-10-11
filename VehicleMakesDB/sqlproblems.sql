@@ -491,4 +491,12 @@ SELECT DISTINCT Makes.Make,Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors  F
 INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
 GROUP BY Make
 Order By TotalNumberOfDoors desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 44: Get Total Number Of Doors Manufactured by 'Ford'
+SELECT DISTINCT Makes.Make,Sum(VehicleDetails.NumDoors) AS TotalNumberOfDoors  FROM VehicleDetails
+INNER JOIN Makes ON Makes.MakeID=VehicleDetails.MakeID
+GROUP BY Make
+HAVING Make='Ford'
+Order By TotalNumberOfDoors desc;
  
