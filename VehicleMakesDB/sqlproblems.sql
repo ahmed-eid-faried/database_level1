@@ -318,7 +318,18 @@ WHERE Bodies.BodyName = 'Sport Utility' AND VehicleDetails.Year > 2020;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 27: Get all vehicles that their Body is 'Coupe' or 'Hatchback' or 'Sedan'
-SELECT top 1000 *, Bodies.BodyName
+SELECT top 1000
+    *, Bodies.BodyName
 FROM VehicleDetails
     INNER JOIN Bodies ON Bodies.BodyID =VehicleDetails.BodyID
 WHERE Bodies.BodyName  in ('Coupe' ,'Hatchback' ,'Sedan' );
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 28: Get all vehicles that their body is 'Coupe' or 'Hatchback' or 'Sedan' and manufactured in year 2008 or 2020 or 2021
+SELECT top 1000
+    *, Bodies.BodyName
+FROM VehicleDetails
+    INNER JOIN Bodies ON Bodies.BodyID =VehicleDetails.BodyID
+WHERE Bodies.BodyName  in ('Coupe' ,'Hatchback' ,'Sedan' ) and VehicleDetails.Year in (2008,2020,2021);
+-----------------------------------------------------------------
+-----------------------------------------------------------------
