@@ -364,5 +364,14 @@ FROM VehicleDetails;
 -----------------------------------------------------------------
 --   Problem 31: Get all Vehicle_Display_Name, year and add extra column to calculate the age of the car then sort the results by age desc.
 SELECT VehicleDetails.Vehicle_Display_Name, VehicleDetails.Year, Age= YEAR(GetDate()) - VehicleDetails.year
-FROM VehicleDetails Order by Age Desc;
-
+FROM VehicleDetails
+Order by Age Desc;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 32: Get all Vehicle_Display_Name, year, Age for vehicles that their age between 15 and 25 years old
+SELECT *
+FROM
+    (SELECT VehicleDetails.Vehicle_Display_Name, VehicleDetails.Year, AGE= YEAR(GETDATE())-VehicleDetails.Year
+    FROM VehicleDetails)R
+WHERE AGE BETWEEN 15 AND 25
+ORDER BY Age Desc;
