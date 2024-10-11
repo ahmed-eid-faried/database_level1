@@ -293,3 +293,10 @@ SELECT DISTINCT VehicleDetails.MakeID , Make, SubModelName FROM VehicleDetails
 INNER JOIN Makes ON Makes.MakeID =VehicleDetails.MakeID 
 INNER JOIN SubModels ON SubModels.ModelID =VehicleDetails.ModelID 
 WHERE SubModelName ='Elite';
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--  Problem 24: Get all vehicles that have Engines > 3 Liters and have only 2 doors
+select * from VehicleDetails
+WHERE VehicleDetails.Engine_Liter_Display>3 and NumDoors =2;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
