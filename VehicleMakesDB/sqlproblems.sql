@@ -445,3 +445,10 @@ ORDER BY Engine_CC DESC;
 SELECT * FROM VehicleDetails
 WHERE VehicleDetails.Engine_CC IN
 (SELECT DISTINCT TOP 3    VehicleDetails.Engine_CC FROM VehicleDetails ORDER BY Engine_CC DESC); 
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 41: Get all Makes that manufactures one of the Max 3 Engine CC
+SELECT DISTINCT Makes.Make FROM VehicleDetails
+inner join Makes ON  Makes.MakeID =VehicleDetails.MakeID
+WHERE VehicleDetails.Engine_CC IN
+(SELECT DISTINCT TOP 3    VehicleDetails.Engine_CC FROM VehicleDetails ORDER BY Engine_CC DESC); 
