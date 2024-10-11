@@ -286,3 +286,10 @@ select
 		Cast( (select count(*)
     from VehicleDetails as TotalVehicles) as float)
 	) as PercOfNoSpecifiedDoors
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-- Problem 23: Get MakeID , Make, SubModelName for all vehicles that have SubModelName 'Elite'
+SELECT DISTINCT VehicleDetails.MakeID , Make, SubModelName FROM VehicleDetails
+INNER JOIN Makes ON Makes.MakeID =VehicleDetails.MakeID 
+INNER JOIN SubModels ON SubModels.ModelID =VehicleDetails.ModelID 
+WHERE SubModelName ='Elite';
