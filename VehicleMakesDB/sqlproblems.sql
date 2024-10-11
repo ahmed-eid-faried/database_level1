@@ -401,6 +401,15 @@ SELECT * FROM VehicleDetails WHERE VehicleDetails.Engine_CC<(
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 37: Get total vehicles that have Engin_CC above average
-SELECT COUNT(*) FROM VehicleDetails WHERE VehicleDetails.Engine_CC>(
+SELECT COUNT(*)as NumberOfVehiclesAboveAverageEngineCC FROM VehicleDetails WHERE VehicleDetails.Engine_CC>(
     SELECT AVG(VehicleDetails.Engine_CC) FROM VehicleDetails
 );
+select Count(*) as NumberOfVehiclesAboveAverageEngineCC from
+(
+ 
+	Select ID,VehicleDetails.Vehicle_Display_Name from VehicleDetails
+	where Engine_CC > ( select  Avg(Engine_CC) as MinEngineCC  from VehicleDetails )
+
+) R1;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
