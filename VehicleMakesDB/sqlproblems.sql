@@ -342,7 +342,8 @@ WHERE YEAR=1950)
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 30: Get all Vehicle_Display_Name, NumDoors and add extra column to describe number of doors by words, and if door is null display 'Not Set'
-SELECT DISTINCT VehicleDetails.NumDoors FROM VehicleDetails;
+SELECT DISTINCT VehicleDetails.NumDoors
+FROM VehicleDetails;
 -- to get all cases -->> 0 1 2 3 4 5 6 8 NULL
 SELECT VehicleDetails.Vehicle_Display_Name, VehicleDetails.NumDoors,
     CASE 
@@ -361,3 +362,7 @@ AS DoorDescriptions
 FROM VehicleDetails;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--   Problem 31: Get all Vehicle_Display_Name, year and add extra column to calculate the age of the car then sort the results by age desc.
+SELECT VehicleDetails.Vehicle_Display_Name, VehicleDetails.Year, Age= YEAR(GetDate()) - VehicleDetails.year
+FROM VehicleDetails Order by Age Desc;
+
