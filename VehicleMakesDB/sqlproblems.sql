@@ -383,42 +383,65 @@ FROM VehicleDetails;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 34: Get all vehicles that have the minimum Engine_CC
-SELECT * FROM VehicleDetails WHERE VehicleDetails.Engine_CC=(
-    SELECT MIN(VehicleDetails.Engine_CC) FROM VehicleDetails
+SELECT *
+FROM VehicleDetails
+WHERE VehicleDetails.Engine_CC=(
+    SELECT MIN(VehicleDetails.Engine_CC)
+FROM VehicleDetails
 );
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 35: Get all vehicles that have the Maximum Engine_CC
-SELECT * FROM VehicleDetails WHERE VehicleDetails.Engine_CC=(
-    SELECT MAX(VehicleDetails.Engine_CC) FROM VehicleDetails
+SELECT *
+FROM VehicleDetails
+WHERE VehicleDetails.Engine_CC=(
+    SELECT MAX(VehicleDetails.Engine_CC)
+FROM VehicleDetails
 );
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 36: Get all vehicles that have Engin_CC below average
-SELECT * FROM VehicleDetails WHERE VehicleDetails.Engine_CC<(
-    SELECT AVG(VehicleDetails.Engine_CC) FROM VehicleDetails
+SELECT *
+FROM VehicleDetails
+WHERE VehicleDetails.Engine_CC<(
+    SELECT AVG(VehicleDetails.Engine_CC)
+FROM VehicleDetails
 );
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 37: Get total vehicles that have Engin_CC above average
-SELECT COUNT(*)as NumberOfVehiclesAboveAverageEngineCC FROM VehicleDetails WHERE VehicleDetails.Engine_CC>(
-    SELECT AVG(VehicleDetails.Engine_CC) FROM VehicleDetails
+SELECT COUNT(*)as NumberOfVehiclesAboveAverageEngineCC
+FROM VehicleDetails
+WHERE VehicleDetails.Engine_CC>(
+    SELECT AVG(VehicleDetails.Engine_CC)
+FROM VehicleDetails
 );
-select Count(*) as NumberOfVehiclesAboveAverageEngineCC from
-(
+select Count(*) as NumberOfVehiclesAboveAverageEngineCC
+from
+    (
  
-	Select ID,VehicleDetails.Vehicle_Display_Name from VehicleDetails
-	where Engine_CC > ( select  Avg(Engine_CC) as MinEngineCC  from VehicleDetails )
+	Select ID, VehicleDetails.Vehicle_Display_Name
+    from VehicleDetails
+    where Engine_CC > ( select Avg(Engine_CC) as MinEngineCC
+    from VehicleDetails )
 
 ) R1;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 38: Get all unique Engin_CC and sort them Desc
-SELECT DISTINCT VehicleDetails.Engine_CC FROM VehicleDetails ORDER BY Engine_CC DESC;
+SELECT DISTINCT VehicleDetails.Engine_CC
+FROM VehicleDetails
+ORDER BY Engine_CC DESC;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 39: Get the maximum 3 Engine CC
-SELECT TOP 3 * FROM (
-SELECT DISTINCT VehicleDetails.Engine_CC FROM VehicleDetails 
-)R
+SELECT DISTINCT TOP 3
+    VehicleDetails.Engine_CC
+FROM VehicleDetails
 ORDER BY Engine_CC DESC;
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 40: Get all vehicles that has one of the Max 3 Engine CC
+SELECT * FROM VehicleDetails
+WHERE VehicleDetails.Engine_CC IN
+(SELECT DISTINCT TOP 3    VehicleDetails.Engine_CC FROM VehicleDetails ORDER BY Engine_CC DESC); 
