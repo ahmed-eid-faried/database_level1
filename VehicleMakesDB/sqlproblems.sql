@@ -394,3 +394,13 @@ SELECT * FROM VehicleDetails WHERE VehicleDetails.Engine_CC=(
 );
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--   Problem 36: Get all vehicles that have Engin_CC below average
+SELECT * FROM VehicleDetails WHERE VehicleDetails.Engine_CC<(
+    SELECT AVG(VehicleDetails.Engine_CC) FROM VehicleDetails
+);
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 37: Get total vehicles that have Engin_CC above average
+SELECT COUNT(*) FROM VehicleDetails WHERE VehicleDetails.Engine_CC>(
+    SELECT AVG(VehicleDetails.Engine_CC) FROM VehicleDetails
+);
