@@ -306,13 +306,19 @@ WHERE VehicleDetails.Engine_Liter_Display>3 and NumDoors =2;
 SELECT VehicleDetails.*, Make
 FROM VehicleDetails
     INNER JOIN Makes ON Makes.MakeID =VehicleDetails.MakeID
-    WHERE VehicleDetails.Engine LIKE '%OHV%'AND VehicleDetails.Engine_Cylinders=4 ;
+WHERE VehicleDetails.Engine LIKE '%OHV%'AND VehicleDetails.Engine_Cylinders=4
+;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 26: Get all vehicles that their body is 'Sport Utility' and Year > 2020
-SELECT *,Bodies.BodyName FROM VehicleDetails 
+SELECT *, Bodies.BodyName
+FROM VehicleDetails
     INNER JOIN Bodies ON Bodies.BodyID =VehicleDetails.BodyID
 WHERE Bodies.BodyName = 'Sport Utility' AND VehicleDetails.Year > 2020;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
-
+--   Problem 27: Get all vehicles that their Body is 'Coupe' or 'Hatchback' or 'Sedan'
+SELECT top 1000 *, Bodies.BodyName
+FROM VehicleDetails
+    INNER JOIN Bodies ON Bodies.BodyID =VehicleDetails.BodyID
+WHERE Bodies.BodyName  in ('Coupe' ,'Hatchback' ,'Sedan' );
