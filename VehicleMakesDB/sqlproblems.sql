@@ -334,6 +334,30 @@ WHERE Bodies.BodyName  in ('Coupe' ,'Hatchback' ,'Sedan' ) and VehicleDetails.Ye
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 29: Return found=1 if there is any vehicle made in year 1950
-SELECT FOUND=1 WHERE EXISTS(SELECT TOP 1 * FROM VehicleDetails WHERE YEAR=1950)
+SELECT FOUND=1
+WHERE EXISTS(SELECT TOP 1
+    *
+FROM VehicleDetails
+WHERE YEAR=1950)
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 30: Get all Vehicle_Display_Name, NumDoors and add extra column to describe number of doors by words, and if door is null display 'Not Set'
+SELECT DISTINCT VehicleDetails.NumDoors FROM VehicleDetails;
+-- to get all cases -->> 0 1 2 3 4 5 6 8 NULL
+SELECT VehicleDetails.Vehicle_Display_Name, VehicleDetails.NumDoors,
+    CASE 
+    WHEN VehicleDetails.NumDoors=0 THEN  'Zero Doors'
+    WHEN VehicleDetails.NumDoors=1 THEN  'One Doors'
+    WHEN VehicleDetails.NumDoors=2 THEN  'Two Doors'
+    WHEN VehicleDetails.NumDoors=3 THEN  'Three Doors'
+    WHEN VehicleDetails.NumDoors=4 THEN  'Four Doors'
+    WHEN VehicleDetails.NumDoors=5 THEN  'Five Doors'
+    WHEN VehicleDetails.NumDoors=6 THEN  'Six Doors'
+    WHEN VehicleDetails.NumDoors=8 THEN  'Eight Doors'
+    WHEN VehicleDetails.NumDoors is null THEN  'Not Set'
+    ELSE 'Unknown'
+END
+AS DoorDescriptions
+FROM VehicleDetails;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
