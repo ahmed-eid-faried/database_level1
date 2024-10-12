@@ -553,7 +553,7 @@ from
     FROM Makes INNER JOIN
         MakeModels ON Makes.MakeID = MakeModels.MakeID
     GROUP BY Makes.Make		
-) R1
+) R1;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
 --   Problem 48: Get the highest Manufacturers manufactured the highest number of models
@@ -573,4 +573,20 @@ from
     GROUP BY MakeID	) R1);
 -----------------------------------------------------------------
 -----------------------------------------------------------------
-
+--   Problem 49: Get the Lowest Manufacturers manufactured the lowest number of models
+-- Get the Lowest  Manufacturers manufactured the lowest number of models , 
+-- remember that they could be more than one manufacturer have the same Lowest  number of models
+SELECT Makes.Make, COUNT(*) AS NumberOfModels
+FROM Makes
+    INNER JOIN MakeModels ON MakeModels.MakeID=Makes.MakeID
+GROUP BY Makes.Make
+HAVING COUNT(*)=(select MIN(NumberOfModels) as MaxNumberOfModels
+from
+    (
+		SELECT Makes.Make, COUNT(*) AS NumberOfModels
+    FROM Makes INNER JOIN
+        MakeModels ON Makes.MakeID = MakeModels.MakeID
+    GROUP BY Makes.Make		
+) R1);
+-----------------------------------------------------------------
+-----------------------------------------------------------------
