@@ -31,4 +31,13 @@ ELSE Managers.Name
 END AS Manager
 FROM Employees
     LEFT JOIN Employees AS Managers ON Employees.ManagerID=Managers.EmployeeID;
- 
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 54: Get All Employees managed by 'Mohammed'
+SELECT Employees.EmployeeID, Employees.Name, Employees.Salary, Employees.ManagerID, Managers.Name AS Manager
+FROM Employees
+    INNER JOIN Employees AS Managers ON Employees.ManagerID=Managers.EmployeeID
+WHERE Managers.Name ='Mohammed';
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
