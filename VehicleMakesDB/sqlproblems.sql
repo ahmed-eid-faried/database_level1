@@ -513,9 +513,9 @@ Order By TotalNumberOfDoors desc;
 -- GROUP BY Make
 -- Order By TotalNumberOfModels desc;
 -----------------------------------------------------------------
-SELECT        Makes.Make, COUNT(*) AS NumberOfModels
-FROM            Makes INNER JOIN
-                         MakeModels ON Makes.MakeID = MakeModels.MakeID
+SELECT Makes.Make, COUNT(*) AS NumberOfModels
+FROM Makes INNER JOIN
+    MakeModels ON Makes.MakeID = MakeModels.MakeID
 GROUP BY Makes.Make
 Order By NumberOfModels Desc;
 -----------------------------------------------------------------
@@ -530,10 +530,47 @@ Order By NumberOfModels Desc;
 -- GROUP BY Make
 -- Order By TotalNumberOfModels desc;
 -----------------------------------------------------------------
-SELECT     TOP 3   Makes.Make, COUNT(*) AS NumberOfModels
-FROM            Makes INNER JOIN
-                         MakeModels ON Makes.MakeID = MakeModels.MakeID
+SELECT TOP 3
+    Makes.Make, COUNT(*) AS NumberOfModels
+FROM Makes INNER JOIN
+    MakeModels ON Makes.MakeID = MakeModels.MakeID
 GROUP BY Makes.Make
 Order By NumberOfModels Desc;
 -----------------------------------------------------------------
 -----------------------------------------------------------------
+--   Problem 47: Get the highest number of models manufactured
+SELECT TOP 1
+    Makes.Make, COUNT(*) AS NumberOfModels
+FROM Makes INNER JOIN
+    MakeModels ON Makes.MakeID = MakeModels.MakeID
+GROUP BY Makes.Make
+Order By NumberOfModels Desc;
+-----------------------------------------------------------------
+select Max(NumberOfModels) as MaxNumberOfModels
+from
+    (
+		SELECT Makes.Make, COUNT(*) AS NumberOfModels
+    FROM Makes INNER JOIN
+        MakeModels ON Makes.MakeID = MakeModels.MakeID
+    GROUP BY Makes.Make		
+) R1
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+--   Problem 48: Get the highest Manufacturers manufactured the highest number of models
+-- Get the highest Manufacturers manufactured the highest number of models , 
+-- remember that they could be more than one manufacturer have the same high number of models
+-- Get the highest Manufacturers manufactured the highest number of models , 
+-- remember that they could be more than one manufacturer have the same high number of models
+SELECT Makes.Make, COUNT(*) AS NumberOfModels
+FROM Makes INNER JOIN
+    MakeModels ON Makes.MakeID = MakeModels.MakeID
+GROUP BY Makes.Make
+
+having COUNT(*) = (select Max(NumberOfModels) as MaxNumberOfModels
+from
+    (SELECT MakeID, COUNT(*) AS NumberOfModels
+    FROM MakeModels
+    GROUP BY MakeID	) R1);
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
